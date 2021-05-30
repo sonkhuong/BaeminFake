@@ -27,6 +27,11 @@
         <activity android:name=".activity.AuthorActivity" />
         <activity android:name=".activity.MainActivity" />
         <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.LoginOptionActivity" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
     </application>
 
 </manifest>

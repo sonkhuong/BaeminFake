@@ -7,9 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.baeminfake.R;
-import com.example.baeminfake.fragment.LoginOptionsFragment;
-//import com.facebook.FacebookSdk;
-//import com.facebook.appevents.AppEventsLogger;
+import com.example.baeminfake.fragment.LoginFragment;
 
 public class AuthorActivity extends AppCompatActivity {
 
@@ -19,7 +17,7 @@ public class AuthorActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.author_activity);
 
-        Fragment current = new LoginOptionsFragment();
+        Fragment current = new LoginFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.author_holder, current, "TAG")
                 .addToBackStack(null)
