@@ -20,6 +20,8 @@ import com.example.baeminfake.controller.SQLiteCartHelper;
 import com.example.baeminfake.controller.SQLiteFoodHelper;
 import com.example.baeminfake.model.Cart;
 import com.example.baeminfake.model.Food;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class OrderActivity extends AppCompatActivity {
 
@@ -30,6 +32,8 @@ public class OrderActivity extends AppCompatActivity {
     private SQLiteFoodHelper sqLite;
     private SQLiteCartHelper sqLite1;
     private NotificationManagerCompat notificationManagerCompat;
+    private FirebaseAuth firebaseAuth;
+    private FirebaseUser firebaseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,12 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.order_activity);
         init();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
         sqLite = new SQLiteFoodHelper(this);
         sqLite1 = new SQLiteCartHelper(this);
+
         Intent intent = getIntent();
         int id = intent.getIntExtra("food", 0);
         Food k = sqLite.getFoodById(id);
@@ -87,7 +95,7 @@ public class OrderActivity extends AppCompatActivity {
         this.addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Cart c = new Cart(0, Integer.parseInt(soLuong.getText().toString()), k.getName(), Double.parseDouble(total.getText().toString()), k.getRestaurant(), k.getRate(), k.getOrders());
+                Cart c = new Cart(firebaseUser.getUid(), 0, Integer.parseInt(soLuong.getText().toString()), k.getName(), Double.parseDouble(total.getText().toString()), k.getRestaurant(), k.getRate(), k.getOrders());
                 sqLite1.addCart(c);
                 Notification notification = new NotificationCompat.Builder(OrderActivity.this, NotificationApp.CHANNEL)
                         .setSmallIcon(R.drawable.com_facebook_button_icon)

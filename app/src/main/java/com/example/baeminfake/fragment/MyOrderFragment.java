@@ -17,6 +17,8 @@ import com.example.baeminfake.R;
 import com.example.baeminfake.controller.CartRecyclerViewAdapter;
 import com.example.baeminfake.controller.SQLiteCartHelper;
 import com.example.baeminfake.model.Cart;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -26,6 +28,7 @@ public class MyOrderFragment extends Fragment {
     private RecyclerView recyclerView;
     private CartRecyclerViewAdapter adapter;
     private SQLiteCartHelper sqLite;
+    private FirebaseUser firebaseUser;
 
     public MyOrderFragment() {
     }
@@ -52,11 +55,13 @@ public class MyOrderFragment extends Fragment {
         View view = inflater.inflate(R.layout.myorder_fragment, container, false);
         init(view);
 
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         adapter = new CartRecyclerViewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
         sqLite = new SQLiteCartHelper(getActivity());
-        List<Cart> carts = sqLite.getCartPay(1);
+        List<Cart> carts = sqLite.getCartUserPay(firebaseUser.getUid(), 1);
         adapter.setCarts(carts);
         recyclerView.setAdapter(adapter);
 

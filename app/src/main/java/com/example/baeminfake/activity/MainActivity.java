@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
         init();
 
 //        sqLite = new SQLiteFoodHelper(this);
-//        sqLite.addFood(new Food("Trà sữa ngon mlem", 25000, "Trà Sữa Mlem", 4, 100));
-//        sqLite.addFood(new Food("Trà sữa ngon mlem", 26000, "Trà Sữa Không Mlem", 3, 100));
-//        sqLite.addFood(new Food("Trà sữa ngon mlem", 25500, "Trà Sữa Hihihaha", 5, 100));
-//        sqLite.addFood(new Food("Trà sữa ngon mlem", 25300, "Trà Sữa Okukaka", 1, 200));
-//        sqLite.addFood(new Food("Trà sữa ngon mlem", 22000, "Trà Sữa Hohoho", 2, 500));
+//        sqLite.addFood(new Food("Trà sữa mlem", 25000, "Trà Sữa Mlem", 4, 100));
+//        sqLite.addFood(new Food("Trà sữa ngon", 26000, "Trà Sữa Không Mlem", 3, 100));
+//        sqLite.addFood(new Food("Trà sữa hihi", 25500, "Trà Sữa Hihihaha", 5, 100));
+//        sqLite.addFood(new Food("Trà sữa nhật bản", 25300, "Trà Sữa Okukaka", 1, 200));
+//        sqLite.addFood(new Food("Trà sữa đường", 22000, "Trà Sữa Hohoho", 2, 500));
 //        sqLite.addFood(new Food("Trà sữa dở tệ", 21000, "Trà Sữa Mlem", 4, 100));
 //        sqLite.addFood(new Food("Trà sữa không ngon", 27000, "Trà Sữa Mlem", 4, 100));
 //        sqLite.addFood(new Food("Trà sữa nóng lạnh", 30000, "Trà Sữa Mlem", 2, 100));
@@ -60,10 +60,6 @@ public class MainActivity extends AppCompatActivity {
 //        sqLite.addFood(new Food("Trà sữa lên men", 19000, "Trà Sữa Hihihaha", 4, 300));
 //        sqLite.addFood(new Food("Trà sữa táo bón", 21000, "Trà Sữa Okukaka", 4, 700));
 //        sqLite.addFood(new Food("Trà sữa thái cực", 25000, "Trà Sữa Okukaka", 5, 100));
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        currentUser = firebaseAuth.getCurrentUser();
-        cartnoti.setText(currentUser.getDisplayName());
 
         adapter = new FoodRecyclerViewAdapter(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -169,5 +165,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_item);
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        currentUser = firebaseAuth.getCurrentUser();
+        cartnoti.setText(currentUser.getDisplayName());
     }
 }

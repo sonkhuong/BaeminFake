@@ -27,8 +27,6 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.jetbrains.annotations.NotNull;
 
-//import static com.example.baeminfake.activity.MainActivity.user;
-
 public class InfoFragment extends Fragment {
 
     private EditText edphone, edname, edmail, edpass, ednewpass;
@@ -63,11 +61,6 @@ public class InfoFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_fragment, container, false);
         init(view);
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        edphone.setText(firebaseUser.getPhoneNumber());
-        edmail.setText(firebaseUser.getEmail());
-        edname.setText(firebaseUser.getDisplayName());
 
         this.turnback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -219,6 +212,22 @@ public class InfoFragment extends Fragment {
         edname.setEnabled(false);
         edmail.setEnabled(false);
         edpass.setEnabled(false);
+
+        Intent intent = getActivity().getIntent();
+        if (intent.getIntExtra("login_code", 0) == 1) {
+            Toast.makeText(getActivity(), "Không có quyền chỉnh sửa thông tin khi đăng nhập bằng facebook!", Toast.LENGTH_LONG).show();
+            udname.setEnabled(false);
+            udmail.setEnabled(false);
+            udphone.setEnabled(false);
+            udpass.setEnabled(false);
+            verifi.setEnabled(false);
+        }
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        edphone.setText(firebaseUser.getPhoneNumber());
+        edmail.setText(firebaseUser.getEmail());
+        edname.setText(firebaseUser.getDisplayName());
     }
 
     public void getDialog() {
@@ -231,7 +240,7 @@ public class InfoFragment extends Fragment {
         builder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                firebaseAuth.signInWithEmailAndPassword("sonmasteryi@gmail.com", inputpass.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                firebaseAuth.signInWithEmailAndPassword(firebaseUser.getEmail(), inputpass.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {

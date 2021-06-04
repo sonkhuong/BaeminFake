@@ -17,7 +17,7 @@ import java.util.List;
 
 public class SQLiteFoodHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "food2.db";
+    private static final String DATABASE_NAME = "food.db";
     private static final int DATABSE_VERSION = 1;
 
     public SQLiteFoodHelper(@Nullable Context context) {

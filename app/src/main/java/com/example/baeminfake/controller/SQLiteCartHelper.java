@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLiteCartHelper extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "cart1.db";
+    private static final String DATABASE_NAME = "cart.db";
     private static final int DATABSE_VERSION = 1;
 
     public SQLiteCartHelper(@Nullable Context context) {
@@ -27,6 +27,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
     public void onCreate(@NotNull SQLiteDatabase db) {
         String sql = "create table cart(" +
                 "id integer primary key autoincrement," +
+                "uid text," +
                 "payment integer," +
                 "soluong integer," +
                 "name text," +
@@ -41,6 +42,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
     public long addCart(Cart o) {
         ContentValues c = new ContentValues();
         c.put("payment", o.getPayment());
+        c.put("uid", o.getUid());
         c.put("soluong", o.getSoluong());
         c.put("name", o.getName());
         c.put("price", o.getPrice());
@@ -51,83 +53,65 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
         return st.insert("cart", null, c);
     }
 
-    public List<Cart> getAll() {
+    public List<Cart> getAllByUid(String uid) {
+        String whereClause = "uid like ?";
+        String[] whereArgs = {"%" + uid + "%"};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("cart", null, whereClause, whereArgs, null, null, null);
         List<Cart> list = new ArrayList<>();
-        SQLiteDatabase statement = getReadableDatabase();
-        Cursor rs = statement.query("cart", null,
-                null, null,
-                null, null, null);
         while ((rs != null) && rs.moveToNext()) {
             int id = rs.getInt(0);
-            int payment = rs.getInt(1);
-            int soluong = rs.getInt(2);
-            String name = rs.getString(3);
-            double price = rs.getDouble(4);
-            String restaurant = rs.getString(5);
-            int rating = rs.getInt(6);
-            int orders = rs.getInt(7);
-            list.add(new Cart(id, payment, soluong, name, price, restaurant, rating, orders));
+            String uid1 = rs.getString(1);
+            int payment = rs.getInt(2);
+            int soluong = rs.getInt(3);
+            String name = rs.getString(4);
+            double price = rs.getDouble(5);
+            String restaurant = rs.getString(6);
+            int rating = rs.getInt(7);
+            int orders = rs.getInt(8);
+            list.add(new Cart(id, uid1, payment, soluong, name, price, restaurant, rating, orders));
         }
         return list;
     }
 
-    public Cart getCartById(int id) {
+    public Cart getCartUserById(int id) {
         String whereClause = "id=?";
         String[] whereArgs = {String.valueOf(id)};
         SQLiteDatabase st = getReadableDatabase();
         Cursor rs = st.query("cart", null, whereClause,
                 whereArgs, null, null, null);
         if (rs.moveToNext()) {
-            int payment = rs.getInt(1);
-            int soluong = rs.getInt(2);
-            String name = rs.getString(3);
-            double price = rs.getDouble(4);
-            String restaurant = rs.getString(5);
-            int rating = rs.getInt(6);
-            int orders = rs.getInt(7);
-            Cart o = new Cart(id, payment, soluong, name, price, restaurant, rating, orders);
+            String uid1 = rs.getString(1);
+            int payment = rs.getInt(2);
+            int soluong = rs.getInt(3);
+            String name = rs.getString(4);
+            double price = rs.getDouble(5);
+            String restaurant = rs.getString(6);
+            int rating = rs.getInt(7);
+            int orders = rs.getInt(8);
+            Cart o = new Cart(id, uid1, payment, soluong, name, price, restaurant, rating, orders);
             return o;
         }
         return null;
     }
 
-    public List<Cart> getCartByName(String name) {
-        String whereClause = "name like ?";
-        String[] whereArgs = {"%" + name + "%"};
+    public List<Cart> getCartUserPay(String uid, int checkpay) {
+        String whereClause = "uid like ? and payment like ?";
+        String[] whereArgs = {"%" + uid + "%", "%" + checkpay + "%"};
         SQLiteDatabase st = getReadableDatabase();
         Cursor rs = st.query("cart", null, whereClause, whereArgs, null, null, null);
         List<Cart> carts = new ArrayList<>();
         while (rs.moveToNext()) {
             int id = rs.getInt(0);
-            int payment = rs.getInt(1);
-            int soluong = rs.getInt(2);
-            String oname = rs.getString(3);
-            double price = rs.getDouble(4);
-            String restaurant = rs.getString(5);
-            int rating = rs.getInt(6);
-            int orders = rs.getInt(7);
-            Cart o = new Cart(id, payment, soluong, oname, price, restaurant, rating, orders);
-            carts.add(o);
-        }
-        return carts;
-    }
-
-    public List<Cart> getCartPay(int checkpay) {
-        String whereClause = "payment like ?";
-        String[] whereArgs = {"%" + checkpay + "%"};
-        SQLiteDatabase st = getReadableDatabase();
-        Cursor rs = st.query("cart", null, whereClause, whereArgs, null, null, null);
-        List<Cart> carts = new ArrayList<>();
-        while (rs.moveToNext()) {
-            int id = rs.getInt(0);
-            int payment = rs.getInt(1);
-            int soluong = rs.getInt(2);
-            String oname = rs.getString(3);
-            double price = rs.getDouble(4);
-            String restaurant = rs.getString(5);
-            int rating = rs.getInt(6);
-            int orders = rs.getInt(7);
-            Cart o = new Cart(id, payment, soluong, oname, price, restaurant, rating, orders);
+            String uid1 = rs.getString(1);
+            int payment = rs.getInt(2);
+            int soluong = rs.getInt(3);
+            String oname = rs.getString(4);
+            double price = rs.getDouble(5);
+            String restaurant = rs.getString(6);
+            int rating = rs.getInt(7);
+            int orders = rs.getInt(8);
+            Cart o = new Cart(id, uid, payment, soluong, oname, price, restaurant, rating, orders);
             carts.add(o);
         }
         return carts;
@@ -135,6 +119,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
 
     public int update(Cart o) {
         ContentValues c = new ContentValues();
+        c.put("uid", o.getUid());
         c.put("payment", o.getPayment());
         c.put("soluong", o.getSoluong());
         c.put("name", o.getName());

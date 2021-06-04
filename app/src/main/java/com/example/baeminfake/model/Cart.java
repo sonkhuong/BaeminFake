@@ -3,6 +3,7 @@ package com.example.baeminfake.model;
 public class Cart {
 
     private int id;
+    private String uid;
     private int payment;
     private int soluong;
     private String name;
@@ -14,8 +15,9 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int id, int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
+    public Cart(int id, String uid, int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
         this.id = id;
+        this.uid = uid;
         this.payment = payment;
         this.soluong = soluong;
         this.name = name;
@@ -25,7 +27,8 @@ public class Cart {
         this.orders = orders;
     }
 
-    public Cart(int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
+    public Cart(String uid, int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
+        this.uid = uid;
         this.payment = payment;
         this.soluong = soluong;
         this.name = name;
@@ -41,6 +44,14 @@ public class Cart {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {
