@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,7 @@ import java.util.List;
 
 public class SettingFragment extends Fragment {
 
+    private TextView save_setting;
     private Spinner textsize, themes, language;
     private List<String> listsize = new ArrayList<>();
     private List<String> listthemes = new ArrayList<>();
@@ -49,6 +51,7 @@ public class SettingFragment extends Fragment {
         textsize = view.findViewById(R.id.text_size);
         themes = view.findViewById(R.id.theme);
         language = view.findViewById(R.id.language);
+        save_setting = view.findViewById(R.id.save_settings);
 
         listsize.add("Nhỏ");
         listsize.add("Vừa");
@@ -63,6 +66,13 @@ public class SettingFragment extends Fragment {
         textsize.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, listsize));
         themes.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, listthemes));
         language.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, listlanguage));
+
+        this.save_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().getSupportFragmentManager().popBackStack();
+            }
+        });
         return view;
     }
 

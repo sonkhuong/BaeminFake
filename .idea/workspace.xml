@@ -6,96 +6,47 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Firebase" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40a6c7b1-f1ae-4efe-b6df-1c7d7f051307" name="Default Changelist" comment="" />
+    <list default="true" id="7bb6774e-06b1-424c-bce0-95b392495edf" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\sonma\.android\avd\Pixel_API_30.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@C:\Users\sonma\.android\avd\Pixel_2_API_30.avd]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
-  <component name="ExternalProjectsManager">
-    <system id="GRADLE">
-      <state>
-        <task path="$PROJECT_DIR$/app">
-          <activation />
-        </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BaeminFake" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BaeminFake" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="BaeminFake" type="f1a62948:ProjectNode" />
-                <item name="app" type="2d1252cf:ModuleNode" />
-                <item name="Run Configurations" type="7b0102dc:RunConfigurationsNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
-      </state>
-    </system>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Class" />
         <option value="resourceFile" />
         <option value="layoutResourceFile" />
-        <option value="Class" />
       </list>
     </option>
   </component>
-  <component name="ProjectId" id="1t1w6xBQbzFGgmoSe9tlECQc8NN" />
+  <component name="ProjectId" id="1tRrp9q5hWoSAWkj2HW6DLnGJVV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="VirtualDevicePath@C:\Users\sonma\.android\avd\Pixel_API_30.avd" />
-    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2021-05-31T08:36:30.864037300Z" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="android-custom-viewC:/Users/sonma/AppData/Local/Android/Sdk/sources/android-30/android/view/View.java_SELECTED" value="View" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/res/drawable-v24" />
-    <property name="project.structure.last.edited" value="Dependencies" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.project.gradle" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Installer\BaeminFake\app\src\main\res\drawable-v24" />
     </key>
-  </component>
-  <component name="RunAnythingCache">
-    <option name="myCommands">
-      <command value="gradle " />
-    </option>
-  </component>
-  <component name="RunAnythingContextRecentDirectoryCache">
-    <option name="paths">
-      <recentPaths value="$PROJECT_DIR$/.gradle/6.7.1/javaCompile" />
-    </option>
   </component>
   <component name="RunManager">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
@@ -167,110 +118,54 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="40a6c7b1-f1ae-4efe-b6df-1c7d7f051307" name="Default Changelist" comment="" />
-      <created>1621949732921</created>
+      <changelist id="7bb6774e-06b1-424c-bce0-95b392495edf" name="Default Changelist" comment="" />
+      <created>1622742923633</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1621949732921</updated>
+      <updated>1622742923633</updated>
     </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="477" y="266" key="#PSD" timestamp="1622041346290">
+    <state x="586" y="198" key="#Inspections" timestamp="1622775234553">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="477" y="266" key="#PSD/0.0.1920.1040@0.0.1920.1040" timestamp="1622041346290" />
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1622370506242">
+    <state x="586" y="198" key="#Inspections/0.0.1920.1040@0.0.1920.1040" timestamp="1622775234553" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622748080660">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622370506242" />
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser" timestamp="1622300145613">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622748080660" />
+    <state x="540" y="275" key="AndroidCreateResourceDirectoryDialog" timestamp="1622745591426">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="236" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1622300145613" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1622546648653">
+    <state x="540" y="275" key="AndroidCreateResourceDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622745591426" />
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog" timestamp="1622779231342">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622546648653" />
-    <state x="100" y="100" width="1720" height="840" key="AVDManager" timestamp="1622407343356">
+    <state x="540" y="275" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622779231342" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1622779326905">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="100" y="100" width="1720" height="840" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1622407343356" />
-    <state x="734" y="309" key="AndroidCreateResourceFileDialog" timestamp="1622570326572">
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1622779326905" />
+    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1622782269955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="734" y="309" key="AndroidCreateResourceFileDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622570326572" />
-    <state x="804" y="310" key="AndroidCreateXmlResourceDialog" timestamp="1622294568383">
+    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1622782269955" />
+    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1622782269955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="804" y="310" key="AndroidCreateXmlResourceDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622294568383" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1622450112038">
+    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1622782269955" />
+    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1622782269955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1622450112038" />
-    <state width="1877" height="255" key="GridCell.Tab.0.bottom" timestamp="1622566868742">
+    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1622782269955" />
+    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1622782269955">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1622566868742" />
-    <state width="1877" height="255" key="GridCell.Tab.0.center" timestamp="1622566868742">
+    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1622782269955" />
+    <state x="776" y="298" key="chooseDestDirectoryDialog" timestamp="1622776410044">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1622566868742" />
-    <state width="1877" height="255" key="GridCell.Tab.0.left" timestamp="1622566868742">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1622566868742" />
-    <state width="1877" height="255" key="GridCell.Tab.0.right" timestamp="1622566868742">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="1877" height="255" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1622566868742" />
-    <state width="938" height="282" key="GridCell.Tab.1.bottom" timestamp="1622370541222">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1622370541222" />
-    <state width="938" height="282" key="GridCell.Tab.1.center" timestamp="1622370541222">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1622370541222" />
-    <state width="938" height="282" key="GridCell.Tab.1.left" timestamp="1622370541222">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1622370541222" />
-    <state width="938" height="282" key="GridCell.Tab.1.right" timestamp="1622370541222">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state width="938" height="282" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1622370541222" />
-    <state x="540" y="263" key="IDE.errors.dialog" timestamp="1622560528715">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="540" y="263" key="IDE.errors.dialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622560528715" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1622363716921">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1622363716921" />
-    <state x="776" y="298" key="chooseDestDirectoryDialog" timestamp="1622550545750">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="776" y="298" key="chooseDestDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622550545750" />
-    <state x="662" y="329" key="com.android.tools.idea.run.deployment.SelectMultipleDevicesDialog" timestamp="1622121385606">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="662" y="329" key="com.android.tools.idea.run.deployment.SelectMultipleDevicesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622121385606" />
-    <state x="1174" y="249" width="585" height="534" key="find.popup" timestamp="1622402795173">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="1174" y="249" width="585" height="534" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1622402795173" />
-    <state x="571" y="264" key="psd.add.library.dependency.panel.dimension" timestamp="1622041341550">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="571" y="264" key="psd.add.library.dependency.panel.dimension/0.0.1920.1040@0.0.1920.1040" timestamp="1622041341550" />
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup" timestamp="1622370336626">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="616" y="240" width="672" height="677" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1622370336626" />
-    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup" timestamp="1622222059686">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="229" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1622222059686" />
+    <state x="776" y="298" key="chooseDestDirectoryDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1622776410044" />
   </component>
 </project>

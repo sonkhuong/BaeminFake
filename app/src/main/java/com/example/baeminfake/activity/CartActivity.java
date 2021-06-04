@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CartActivity extends AppCompatActivity {
 
-    private TextView turnback, pay;
+    private TextView turnback, pay, delete;
     private RecyclerView recyclerView;
     private CartRecyclerViewAdapter adapter;
     private SQLiteCartHelper sqLite;
@@ -33,6 +33,7 @@ public class CartActivity extends AppCompatActivity {
         turnback = findViewById(R.id.back_to_main3);
         pay = findViewById(R.id.pay);
         recyclerView = findViewById(R.id.list_cart);
+        delete = findViewById(R.id.delete_order);
 
         adapter = new CartRecyclerViewAdapter();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -40,7 +41,6 @@ public class CartActivity extends AppCompatActivity {
         List<Cart> carts = sqLite.getCartPay(0);
         adapter.setCarts(carts);
         recyclerView.setAdapter(adapter);
-//        recyclerView.setEnabled(true);
 
         this.turnback.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +58,19 @@ public class CartActivity extends AppCompatActivity {
                         Cart c = sqLite.getCartById(i);
                         c.setPayment(1);
                         sqLite.update(c);
+                        startActivity(new Intent(CartActivity.this, MainActivity.class));
+                        CartActivity.this.finish();
+                    }
+                }
+            }
+        });
+
+        this.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = 0; i < 100; i++) {
+                    if (adapter.chooseid[i] == 1) {
+                        sqLite.delete(i);
                         startActivity(new Intent(CartActivity.this, MainActivity.class));
                         CartActivity.this.finish();
                     }

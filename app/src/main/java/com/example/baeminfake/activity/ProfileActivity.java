@@ -1,5 +1,6 @@
 package com.example.baeminfake.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -47,8 +48,10 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @androidx.annotation.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1000) {
-            Uri imageUri = data.getData();
-            uploadAvatar(imageUri);
+            if (resultCode == Activity.RESULT_OK) {
+                Uri imageUri = data.getData();
+                uploadAvatar(imageUri);
+            }
         }
     }
 
