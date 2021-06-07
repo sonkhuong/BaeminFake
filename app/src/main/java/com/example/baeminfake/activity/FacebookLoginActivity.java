@@ -3,9 +3,6 @@ package com.example.baeminfake.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +14,7 @@ import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,12 +27,12 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.example.baeminfake.activity.SplashActivity.login_code;
+
 
 public class FacebookLoginActivity extends AppCompatActivity {
 
-    private TextView result;
     private LoginButton login;
-    private ImageView login_avatar;
     private CallbackManager callbackManager;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -49,8 +47,6 @@ public class FacebookLoginActivity extends AppCompatActivity {
         FacebookSdk.sdkInitialize(getApplicationContext());
 
         login = findViewById(R.id.login_fb);
-        result = findViewById(R.id.fb_login_result);
-        login_avatar = findViewById(R.id.logo_login_fb);
         login.setReadPermissions("email", "public_profile");
 
         callbackManager = CallbackManager.Factory.create();
@@ -62,12 +58,10 @@ public class FacebookLoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                result.setText("Login canceled.");
             }
 
             @Override
             public void onError(FacebookException e) {
-                result.setText("Login failed.");
             }
         });
 
@@ -76,33 +70,21 @@ public class FacebookLoginActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull @NotNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user != null) {
-                    nextActivity();
-                } else {
-                    Toast.makeText(FacebookLoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
+                    LoginManager.getInstance().logOut();
                 }
             }
-        }
-
-        ;
+        };
 
         accessTokenTracker = new AccessTokenTracker() {
             @Override
             protected void onCurrentAccessTokenChanged(AccessToken oldAccessToken, AccessToken
                     currentAccessToken) {
-                if (currentAccessToken == null) {
-                    firebaseAuth.signOut();
+                if (currentAccessToken != null) {
+                    LoginManager.getInstance().logOut();
                 }
             }
-        }
-
-        ;
+        };
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        nextActivity();
-//    }
 
     @Override
     protected void onStart() {
@@ -127,7 +109,6 @@ public class FacebookLoginActivity extends AppCompatActivity {
 
     private void handleFacebookToken(AccessToken accessToken) {
         Log.d("FACEBOOK_RESULT", "handle login user");
-
         AuthCredential authCredential = FacebookAuthProvider.getCredential(accessToken.getToken());
         firebaseAuth.signInWithCredential(authCredential).addOnCompleteListener(FacebookLoginActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -143,9 +124,7 @@ public class FacebookLoginActivity extends AppCompatActivity {
     }
 
     private void nextActivity() {
-        Intent intent1 = new Intent(FacebookLoginActivity.this, ProfileActivity.class);
-        intent1.putExtra("login_code", 1);
-
+        login_code = 1;
         startActivity(new Intent(FacebookLoginActivity.this, MainActivity.class));
         FacebookLoginActivity.this.finish();
     }

@@ -98,8 +98,8 @@ public class OrderActivity extends AppCompatActivity {
                 Cart c = new Cart(firebaseUser.getUid(), 0, Integer.parseInt(soLuong.getText().toString()), k.getName(), Double.parseDouble(total.getText().toString()), k.getRestaurant(), k.getRate(), k.getOrders());
                 sqLite1.addCart(c);
                 Notification notification = new NotificationCompat.Builder(OrderActivity.this, NotificationApp.CHANNEL)
-                        .setSmallIcon(R.drawable.com_facebook_button_icon)
-                        .setContentTitle("Cập nhật giỏ hàng")
+                        .setSmallIcon(R.drawable.logo)
+                        .setContentTitle("Cập nhật giỏ hàng:")
                         .setContentText("Bạn vừa thêm mới một mặt hàng vào giỏi! Kiểm tra ngay")
                         .setPriority(NotificationCompat.PRIORITY_HIGH)
                         .setCategory(NotificationCompat.CATEGORY_MESSAGE)

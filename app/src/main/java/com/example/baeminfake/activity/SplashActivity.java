@@ -3,7 +3,6 @@ package com.example.baeminfake.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +13,7 @@ public class SplashActivity extends AppCompatActivity {
 
     private Runnable runnable;
     private Handler handler;
+    public static int login_code = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

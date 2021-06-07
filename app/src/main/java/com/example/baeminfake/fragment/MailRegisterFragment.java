@@ -23,6 +23,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
 
+import static com.example.baeminfake.activity.SplashActivity.login_code;
+
 public class MailRegisterFragment extends Fragment {
 
     private EditText regisName, regisMail, regisPass, regisRePass;
@@ -100,6 +102,7 @@ public class MailRegisterFragment extends Fragment {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     Toast.makeText(getActivity(), "Đăng kí tà khoản thành công!", Toast.LENGTH_SHORT).show();
+                                    login_code = 0;
                                     startActivity(new Intent(getActivity(), MainActivity.class));
                                     getActivity().finish();
                                 }

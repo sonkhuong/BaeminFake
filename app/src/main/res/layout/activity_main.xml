@@ -9,41 +9,56 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="5dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:ignore="ScrollViewSize">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="25dp">
+            android:layout_height="50dp">
 
             <TextView
                 android:id="@+id/choose_map"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
                 android:drawableLeft="@drawable/ic_baseline_bin"
                 android:drawableRight="@drawable/ic_baseline_chevron_right_24"
                 android:drawablePadding="5dp"
                 android:gravity="center"
-                android:text="Hà Đông"
-                android:textColor="@color/blue" />
+                android:text="Hà Nội"
+                android:textColor="@color/blue"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/cart_noti"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:layout_gravity="right"
-                android:layout_marginRight="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="50dp"
                 android:drawableRight="@drawable/ic_baseline_shopping_cart_24"
                 android:drawablePadding="5dp"
-                android:text="Sơn Khương" />
+                android:paddingLeft="8dp"
+                android:paddingTop="7dp"
+                android:text="Sơn Khương"
+                android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/get_profile"
+            <com.nex3z.notificationbadge.NotificationBadge
+                android:id="@+id/badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="35dp"
+                app:nbMaxTextLength="2" />
+
+            <TextView
+                android:id="@+id/get_profile"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/ic_baseline_menu_24" />
         </androidx.cardview.widget.CardView>
 
@@ -241,7 +256,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"
             android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:hint="Tìm kiếm món ngon ngay nào..." />
+            android:hint="Tìm kiếm món ngon ngay nào..."
+            android:singleLine="true" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/list_item"

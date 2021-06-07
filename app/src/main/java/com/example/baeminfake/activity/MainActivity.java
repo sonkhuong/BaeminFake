@@ -19,11 +19,14 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.baeminfake.R;
 import com.example.baeminfake.controller.FoodRecyclerViewAdapter;
 import com.example.baeminfake.controller.FragmentBottomNavigation;
+import com.example.baeminfake.controller.SQLiteCartHelper;
 import com.example.baeminfake.controller.SQLiteFoodHelper;
+import com.example.baeminfake.model.Cart;
 import com.example.baeminfake.model.Food;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.nex3z.notificationbadge.NotificationBadge;
 
 import java.util.List;
 
@@ -39,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private FoodRecyclerViewAdapter adapter;
     private SQLiteFoodHelper sqLite;
+    private SQLiteCartHelper sqLite1;
+    private NotificationBadge notificationBadge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +70,21 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         sqLite = new SQLiteFoodHelper(this);
+        sqLite1 = new SQLiteCartHelper(this);
         List<Food> foods = sqLite.getAll();
+        List<Cart> carts = sqLite1.getCartUserPay(currentUser.getUid(), 0);
         adapter.setFoods(foods);
         recyclerView.setAdapter(adapter);
 
+        this.choosemap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MapActivity.class));
+                MainActivity.this.finish();
+            }
+        });
+
+        notificationBadge.setNumber(carts.size());
         this.cartnoti.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.list_item);
         viewPager = findViewById(R.id.view_pager);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
+        notificationBadge = findViewById(R.id.badge);
 
         firebaseAuth = FirebaseAuth.getInstance();
         currentUser = firebaseAuth.getCurrentUser();

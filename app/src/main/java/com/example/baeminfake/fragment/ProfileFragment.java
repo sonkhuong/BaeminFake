@@ -1,6 +1,7 @@
 package com.example.baeminfake.fragment;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,9 +27,11 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.baeminfake.activity.SplashActivity.login_code;
+
 public class ProfileFragment extends Fragment {
 
-    private TextView name, turnback, myorder, camera, favorite, history, wallet, settings, about;
+    private TextView name, turnback, myorder, camera, favorite, history, wallet, settings, about, textverifi, textgetverifi;
     private ImageButton verifi;
     public static CircleImageView avatar;
     private FirebaseUser firebaseUser;
@@ -60,11 +63,6 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.profile_fragment, container, false);
         init(view);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        storageReference = FirebaseStorage.getInstance().getReference();
-        name.setText(firebaseUser.getDisplayName());
 
         StorageReference profileref = storageReference.child(firebaseUser.getUid() + ".jpg");
         profileref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -149,6 +147,33 @@ public class ProfileFragment extends Fragment {
         about = view.findViewById(R.id.support);
         camera = view.findViewById(R.id.cammera);
         avatar = view.findViewById(R.id.profile_image);
+        textverifi = view.findViewById(R.id.text_get_verifi);
+        textgetverifi = view.findViewById(R.id.get_verifi);
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        storageReference = FirebaseStorage.getInstance().getReference();
+        name.setText(firebaseUser.getDisplayName());
+
+        if (login_code == 1) {
+            Drawable drawable = getResources().getDrawable(R.drawable.facebook2);
+            verifi.setBackground(drawable);
+            verifi.setEnabled(false);
+            textverifi.setText("Cảm ơn bạn đã sử dụng ứng dụng của chúng tôi. Chúc bạn mua hàng vui vẻ.");
+            textgetverifi.setText("Bạn đang đăng nhập Facebook!");
+        } else {
+            if (firebaseUser.isEmailVerified()) {
+                Drawable drawable = getResources().getDrawable(R.drawable.message);
+                verifi.setBackground(drawable);
+                textgetverifi.setText("Bạn đã xác thực email!");
+                textverifi.setText("Bạn sẽ nhận được nhiều thông báo quan trọng và dùng email cho việc đặt lại mật khẩu.");
+            } else {
+                Drawable drawable = getResources().getDrawable(R.drawable.message);
+                verifi.setBackground(drawable);
+                textgetverifi.setText("Nhấp vào ảnh để xác thực email!");
+                textverifi.setText("Bạn sẽ nhận được nhiều thông báo quan trọng và dùng email cho việc đặt lại mật khẩu.");
+            }
+        }
     }
 
     public void getFrament(Fragment current) {

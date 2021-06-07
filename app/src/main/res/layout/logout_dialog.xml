@@ -10,6 +10,6 @@
         android:layout_height="50dp"
         android:layout_gravity="center_vertical"
         android:gravity="center"
-        android:text="Thay đổi thông tin thành công! Vui lòng đăng nhập lại để cập nhật thông tin tài khoản" />
+        android:text="Bạn cần đăng nhập lại để cập nhật thông tin thay đổi mới nhất của tài khoản" />
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,12 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 
 import org.jetbrains.annotations.NotNull;
 
+import static com.example.baeminfake.activity.SplashActivity.login_code;
+
 public class InfoFragment extends Fragment {
 
     private EditText edphone, edname, edmail, edpass, ednewpass;
-    private TextView udphone, udname, udmail, udpass, turnback, verifi, logout, titlepass, cancelupdate;
+    private TextView udphone, udname, udmail, udpass, turnback, verifi, logout, titlepass, cancelupdate, textverifi;
     private CardView newpass;
     private int confirmpassword = 0;
     private FirebaseAuth firebaseAuth;
@@ -47,6 +50,13 @@ public class InfoFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            getLogout();
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,6 +136,25 @@ public class InfoFragment extends Fragment {
             }
         });
 
+        this.verifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (firebaseUser.isEmailVerified() != true) {
+                    firebaseUser.sendEmailVerification()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(getActivity(), "Verify email send! Confirm the mail and restart this application!", Toast.LENGTH_LONG).show();
+                                        Handler h = new Handler();
+                                        h.postDelayed(runnable, 3000);
+                                    }
+                                }
+                            });
+                }
+            }
+        });
+
         this.udpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -191,7 +220,7 @@ public class InfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    public void init(View view) {
+    private void init(View view) {
         turnback = view.findViewById(R.id.back_to_profile1);
         edphone = view.findViewById(R.id.edit_phone);
         edname = view.findViewById(R.id.edit_name);
@@ -206,6 +235,7 @@ public class InfoFragment extends Fragment {
         udname = view.findViewById(R.id.update_name);
         udpass = view.findViewById(R.id.update_password);
         verifi = view.findViewById(R.id.verifi_email);
+        textverifi = view.findViewById(R.id.text_verifi_email);
         logout = view.findViewById(R.id.logout);
         edpass.setText(null);
         edphone.setEnabled(false);
@@ -213,24 +243,34 @@ public class InfoFragment extends Fragment {
         edmail.setEnabled(false);
         edpass.setEnabled(false);
 
-        Intent intent = getActivity().getIntent();
-        if (intent.getIntExtra("login_code", 0) == 1) {
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+        edphone.setText(firebaseUser.getPhoneNumber());
+        edmail.setText(firebaseUser.getEmail());
+        edname.setText(firebaseUser.getDisplayName());
+
+        if (login_code == 1) {
             Toast.makeText(getActivity(), "Không có quyền chỉnh sửa thông tin khi đăng nhập bằng facebook!", Toast.LENGTH_LONG).show();
             udname.setEnabled(false);
             udmail.setEnabled(false);
             udphone.setEnabled(false);
             udpass.setEnabled(false);
             verifi.setEnabled(false);
+            textverifi.setText("Bạn đang thực hiện đăng nhập bằng tài khoản Facebook và không có quyền chỉnh sửa thông tin cá nhân!");
+            verifi.setText("");
+        } else {
+            if (firebaseUser.isEmailVerified()) {
+                verifi.setEnabled(false);
+                textverifi.setText("Bạn đã xác thực email chot tia khoản này. Hiện tại email có thể sử dụng để quên mật khẩu và nhiều tiện ích khác.");
+                verifi.setText("");
+            } else {
+                textverifi.setText("Bạn sẽ nhận được nhiều thông báo quan trọng và dùng email cho việc đặt lại mật khẩu.");
+                verifi.setText("XÁC THỰC EMAIL");
+            }
         }
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseUser = firebaseAuth.getCurrentUser();
-        edphone.setText(firebaseUser.getPhoneNumber());
-        edmail.setText(firebaseUser.getEmail());
-        edname.setText(firebaseUser.getDisplayName());
     }
 
-    public void getDialog() {
+    private void getDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Xác nhận mật khẩu!");
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog, (ViewGroup) getView(), false);
@@ -263,9 +303,9 @@ public class InfoFragment extends Fragment {
         builder.show();
     }
 
-    public void getChange(int x, String n) {
+    private void getChange(int x, String n) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Xác nhận thay đổi");
+        builder.setTitle("Xác nhận thay đổi?");
         View view = LayoutInflater.from(getContext()).inflate(R.layout.confirm_change_dialog, (ViewGroup) getView(), false);
         builder.setView(view);
 
@@ -298,9 +338,9 @@ public class InfoFragment extends Fragment {
         builder.show();
     }
 
-    public void getLogout() {
+    private void getLogout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setTitle("Cập nhật dữ liệu");
+        builder.setTitle("Restart ứng dụng để update dữ liệu mới?");
         View view = LayoutInflater.from(getContext()).inflate(R.layout.logout_dialog, (ViewGroup) getView(), false);
         builder.setView(view);
 
@@ -322,7 +362,7 @@ public class InfoFragment extends Fragment {
         builder.show();
     }
 
-    public void updateName(FirebaseUser current, String name) {
+    private void updateName(FirebaseUser current, String name) {
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setDisplayName(name)
 //                .setPhotoUri(Uri.parse("https://example.com/jane-q-user/profile.jpg"))
@@ -333,35 +373,38 @@ public class InfoFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            getLogout();
+                            Handler h = new Handler();
+                            h.postDelayed(runnable, 1500);
                         }
                     }
                 });
     }
 
-    public void updateEmail(FirebaseUser current, String mail) {
+    private void updateEmail(FirebaseUser current, String mail) {
         current.updateEmail(mail)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            getLogout();
+                            Handler h = new Handler();
+                            h.postDelayed(runnable, 1500);
                         }
                     }
                 });
     }
 
-    public void updatePhone() {
+    private void updatePhone() {
 
     }
 
-    public void updatePass(FirebaseUser current, String pass) {
+    private void updatePass(FirebaseUser current, String pass) {
         current.updatePassword(pass)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            getLogout();
+                            Handler h = new Handler();
+                            h.postDelayed(runnable, 1500);
                         }
                     }
                 });

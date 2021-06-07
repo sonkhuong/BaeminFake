@@ -22,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import static com.example.baeminfake.activity.SplashActivity.login_code;
+
 public class MailLoginFragment extends Fragment {
 
     private EditText username, password;
@@ -85,6 +87,7 @@ public class MailLoginFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            login_code = 0;
                             startActivity(new Intent(getActivity(), MainActivity.class));
                             getActivity().finish();
                         } else {
