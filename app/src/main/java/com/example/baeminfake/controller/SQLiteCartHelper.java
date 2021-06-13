@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SQLiteCartHelper extends SQLiteOpenHelper {
+
     private static final String DATABASE_NAME = "cart.db";
     private static final int DATABSE_VERSION = 1;
 
@@ -30,6 +31,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
                 "uid text," +
                 "payment integer," +
                 "soluong integer," +
+                "category integer," +
                 "name text," +
                 "price double," +
                 "restaurant text," +
@@ -44,6 +46,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
         c.put("payment", o.getPayment());
         c.put("uid", o.getUid());
         c.put("soluong", o.getSoluong());
+        c.put("category", o.getCategory());
         c.put("name", o.getName());
         c.put("price", o.getPrice());
         c.put("restaurant", o.getRestaurant());
@@ -64,12 +67,13 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
             String uid1 = rs.getString(1);
             int payment = rs.getInt(2);
             int soluong = rs.getInt(3);
-            String name = rs.getString(4);
-            double price = rs.getDouble(5);
-            String restaurant = rs.getString(6);
-            int rating = rs.getInt(7);
-            int orders = rs.getInt(8);
-            list.add(new Cart(id, uid1, payment, soluong, name, price, restaurant, rating, orders));
+            int category = rs.getInt(4);
+            String name = rs.getString(5);
+            double price = rs.getDouble(6);
+            String restaurant = rs.getString(7);
+            int rating = rs.getInt(8);
+            int orders = rs.getInt(9);
+            list.add(new Cart(id, uid1, payment, soluong, category, name, price, restaurant, rating, orders));
         }
         return list;
     }
@@ -84,12 +88,13 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
             String uid1 = rs.getString(1);
             int payment = rs.getInt(2);
             int soluong = rs.getInt(3);
-            String name = rs.getString(4);
-            double price = rs.getDouble(5);
-            String restaurant = rs.getString(6);
-            int rating = rs.getInt(7);
-            int orders = rs.getInt(8);
-            Cart o = new Cart(id, uid1, payment, soluong, name, price, restaurant, rating, orders);
+            int category = rs.getInt(4);
+            String name = rs.getString(5);
+            double price = rs.getDouble(6);
+            String restaurant = rs.getString(7);
+            int rating = rs.getInt(8);
+            int orders = rs.getInt(9);
+            Cart o = new Cart(id, uid1, payment, soluong, category, name, price, restaurant, rating, orders);
             return o;
         }
         return null;
@@ -106,12 +111,13 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
             String uid1 = rs.getString(1);
             int payment = rs.getInt(2);
             int soluong = rs.getInt(3);
-            String oname = rs.getString(4);
-            double price = rs.getDouble(5);
-            String restaurant = rs.getString(6);
-            int rating = rs.getInt(7);
-            int orders = rs.getInt(8);
-            Cart o = new Cart(id, uid, payment, soluong, oname, price, restaurant, rating, orders);
+            int category = rs.getInt(4);
+            String oname = rs.getString(5);
+            double price = rs.getDouble(6);
+            String restaurant = rs.getString(7);
+            int rating = rs.getInt(8);
+            int orders = rs.getInt(9);
+            Cart o = new Cart(id, uid, payment, soluong, category, oname, price, restaurant, rating, orders);
             carts.add(o);
         }
         return carts;
@@ -122,6 +128,7 @@ public class SQLiteCartHelper extends SQLiteOpenHelper {
         c.put("uid", o.getUid());
         c.put("payment", o.getPayment());
         c.put("soluong", o.getSoluong());
+        c.put("category", o.getCategory());
         c.put("name", o.getName());
         c.put("price", o.getPrice());
         c.put("restaurant", o.getRestaurant());

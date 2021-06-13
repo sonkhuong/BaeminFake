@@ -49,7 +49,44 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<FoodRecyclerVi
         holder.txtRestaurant.setText(o.getRestaurant());
         holder.rating.setRating(o.getRate());
         holder.txtOrder.setText("(" + o.getOrders() + "+)");
-        holder.imgItem.setImageResource(R.drawable.trasua);
+        switch (o.getCategory()) {
+            case 0: {
+                holder.imgItem.setImageResource(R.drawable.trasua);
+                break;
+            }
+            case 1: {
+                holder.imgItem.setImageResource(R.drawable.anvat);
+                break;
+            }
+            case 2: {
+                holder.imgItem.setImageResource(R.drawable.banhmi);
+                break;
+            }
+            case 3: {
+                holder.imgItem.setImageResource(R.drawable.monchinh);
+                break;
+            }
+            case 4: {
+                holder.imgItem.setImageResource(R.drawable.pizza);
+                break;
+            }
+            case 5: {
+                holder.imgItem.setImageResource(R.drawable.beefsteak);
+                break;
+            }
+            case 6: {
+                holder.imgItem.setImageResource(R.drawable.sandwich);
+                break;
+            }
+            case 7: {
+                holder.imgItem.setImageResource(R.drawable.dohop);
+                break;
+            }
+            case 8: {
+                holder.imgItem.setImageResource(R.drawable.comsuat);
+                break;
+            }
+        }
 
         Activity activity = this.activity;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -58,6 +95,7 @@ public class FoodRecyclerViewAdapter extends RecyclerView.Adapter<FoodRecyclerVi
                 Intent intent = new Intent(activity, OrderActivity.class);
                 intent.putExtra("food", o.getId());
                 activity.startActivity(intent);
+                activity.finish();
             }
         });
     }

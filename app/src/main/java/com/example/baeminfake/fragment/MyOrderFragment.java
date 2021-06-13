@@ -69,6 +69,7 @@ public class MyOrderFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 getActivity().getSupportFragmentManager().popBackStack();
+                sqLite.close();
             }
         });
 

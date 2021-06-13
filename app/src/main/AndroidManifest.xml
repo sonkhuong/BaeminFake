@@ -7,10 +7,6 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <!--    <meta-data-->
-    <!--        android:name="com.google.android.geo.API_KEY"-->
-    <!--        android:value="AIzaSyCUUDDfIgMhX1nxXlbKcM5KIQrixTlK3fE" />-->
-
     <application
         android:name=".controller.NotificationApp"
         android:allowBackup="true"
@@ -34,6 +30,7 @@
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.CartActivity" />
         <activity android:name=".activity.MapActivity" />
+        <activity android:name=".activity.GetMoreActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

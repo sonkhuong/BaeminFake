@@ -64,25 +64,24 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
+            android:layout_height="220dp">
+
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/view_pager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
-                android:layout_height="5dp"
+                android:layout_height="15dp"
+                android:layout_marginTop="4dp"
                 android:background="@drawable/gray_shape_line"
                 android:backgroundTint="@color/color_bottom"
-                android:paddingTop="4dp"
                 app:itemIconTint="@color/color_bottom"
                 app:itemTextColor="@color/color_bottom"
                 app:labelVisibilityMode="labeled"
@@ -91,6 +90,18 @@
                 app:menu="@menu/menu_bottom" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/notifi_main"
+            android:layout_width="250dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:text="Baemin không hoạt động ở khung giờ hiện tại, quý khách vui lòng quay trở lại từ 4h30.am đến 1h00.am sáng ngày tiếp theo"
+            android:textSize="15sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/bigsale"
@@ -106,6 +117,7 @@
             android:textStyle="bold" />
 
         <LinearLayout
+            android:id="@+id/linear_meal"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
@@ -225,45 +237,176 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/foru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/border_6_noti"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableLeft="@drawable/ic_foryou"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical"
+                android:text="Gợi ý cho bạn"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_foru"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Trưa rồi! Order ngay thôi!" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_foru"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/maybelove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border_6_noti"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableLeft="@drawable/ic_insignia"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical"
+                android:text="Đơn hàng dang dở"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Đừng bỏ lỡ những đơn hàng bạn đã xem nhé!" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_love"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/drink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border_6_noti"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/ic_juice"
+                    android:drawablePadding="7dp"
+                    android:gravity="center_vertical"
+                    android:text="Đồ uống ngay"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/getmore_dirnk"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:paddingRight="5dp"
+                    android:text="Xem thêm >"
+                    android:textColor="#000CFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Giảm 1 tỷ cho đơn từ 0 đồng!" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_food"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/dealhot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="5dp"
-            android:drawableLeft="@drawable/ic_fire"
-            android:drawableRight="@drawable/ic_baseline_chevron_right_24"
-            android:drawablePadding="7dp"
-            android:gravity="center_vertical"
-            android:text="Deal Hot"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:layout_marginTop="5dp"
+            android:background="@drawable/border_6_noti"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="5dp"
+                android:drawableLeft="@drawable/ic_fire"
+                android:drawablePadding="7dp"
+                android:gravity="center_vertical"
+                android:text="Đột nhập nhà hàng"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Yêu thích nhà hàng để nhận thông báo về món mới!" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_restaurant"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:orientation="horizontal" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:text="Giảm 1 tỷ cho đơn từ 0 đồng" />
-
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:drawableLeft="@drawable/ic_baseline_search_24"
-            android:hint="Tìm kiếm món ngon ngay nào..."
-            android:singleLine="true" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/list_item"
-            android:layout_width="match_parent"
-            android:layout_height="575dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp" />
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Bản quyền thuộc về Sơn Khương"
+            android:textStyle="bold" />
     </LinearLayout>
 </ScrollView>

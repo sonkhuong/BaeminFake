@@ -6,6 +6,7 @@ public class Cart {
     private String uid;
     private int payment;
     private int soluong;
+    private int category;
     private String name;
     private double price;
     private String restaurant;
@@ -15,11 +16,12 @@ public class Cart {
     public Cart() {
     }
 
-    public Cart(int id, String uid, int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
+    public Cart(int id, String uid, int payment, int soluong, int category, String name, double price, String restaurant, int rate, int orders) {
         this.id = id;
         this.uid = uid;
         this.payment = payment;
         this.soluong = soluong;
+        this.category = category;
         this.name = name;
         this.price = price;
         this.restaurant = restaurant;
@@ -27,10 +29,11 @@ public class Cart {
         this.orders = orders;
     }
 
-    public Cart(String uid, int payment, int soluong, String name, double price, String restaurant, int rate, int orders) {
+    public Cart(String uid, int payment, int soluong, int category, String name, double price, String restaurant, int rate, int orders) {
         this.uid = uid;
         this.payment = payment;
         this.soluong = soluong;
+        this.category = category;
         this.name = name;
         this.price = price;
         this.restaurant = restaurant;
@@ -52,6 +55,30 @@ public class Cart {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getPayment() {
+        return payment;
+    }
+
+    public void setPayment(int payment) {
+        this.payment = payment;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
     }
 
     public String getName() {
@@ -92,21 +119,5 @@ public class Cart {
 
     public void setOrders(int orders) {
         this.orders = orders;
-    }
-
-    public int getPayment() {
-        return payment;
-    }
-
-    public void setPayment(int payment) {
-        this.payment = payment;
-    }
-
-    public int getSoluong() {
-        return soluong;
-    }
-
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
     }
 }

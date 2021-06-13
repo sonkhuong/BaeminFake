@@ -263,5 +263,15 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent" />
         </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:gravity="center"
+            android:text="Bản quyền thuộc về Sơn Khương"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent" />
     </LinearLayout>
 </ScrollView>

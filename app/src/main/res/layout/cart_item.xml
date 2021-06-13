@@ -2,7 +2,9 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="75dp">
+    android:layout_height="75dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_cart"
@@ -17,6 +19,7 @@
             app:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/cart_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

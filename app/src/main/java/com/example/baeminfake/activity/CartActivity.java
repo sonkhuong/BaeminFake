@@ -51,6 +51,7 @@ public class CartActivity extends AppCompatActivity {
         this.turnback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sqLite.close();
                 startActivity(new Intent(CartActivity.this, MainActivity.class));
                 CartActivity.this.finish();
             }
@@ -64,6 +65,7 @@ public class CartActivity extends AppCompatActivity {
                         Cart c = sqLite.getCartUserById(i);
                         c.setPayment(1);
                         sqLite.update(c);
+                        sqLite.close();
                         startActivity(new Intent(CartActivity.this, MainActivity.class));
                         CartActivity.this.finish();
                     }
@@ -77,6 +79,8 @@ public class CartActivity extends AppCompatActivity {
                 for (int i = 0; i < 100; i++) {
                     if (adapter.chooseid[i] == 1) {
                         sqLite.delete(i);
+                        adapter.chooseid[i] = 0;
+                        sqLite.close();
                         startActivity(new Intent(CartActivity.this, MainActivity.class));
                         CartActivity.this.finish();
                     }

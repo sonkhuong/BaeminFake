@@ -1,9 +1,15 @@
 package com.example.baeminfake.activity;
 
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,53 +20,125 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.IOException;
+import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private TextView txtPosition, txtOk;
+    private SupportMapFragment mapFragment;
+    private TextView search_location;
+    private EditText text_location;
+    private FloatingActionButton add_location;
+    public static String location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.map_activity);
 
-        txtPosition = findViewById(R.id.location_map);
-        txtOk = findViewById(R.id.confirm_map);
+        search_location = findViewById(R.id.search_location);
+        text_location = findViewById(R.id.text_location);
+        add_location = findViewById(R.id.add_location);
 
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.view_map);
-        mapFragment.getMapAsync(this);
 
-        this.txtOk.setOnClickListener(new View.OnClickListener() {
+        this.search_location.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MapActivity.this, MainActivity.class));
+                location = text_location.getText().toString();
+
+                List<Address> addresses = null;
+
+                if (location != null && !location.equals("")) {
+                    Geocoder geocoder = new Geocoder(MapActivity.this);
+
+                    try {
+                        addresses = geocoder.getFromLocationName(location, 3);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    if (addresses != null && addresses.size() != 0) {
+                        Address address = addresses.get(0);
+                        location = address.getAddressLine(0);
+                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.clear();
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                    } else {
+                        Toast.makeText(MapActivity.this, "Can not find this location! Check your internet or your Location!", Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+        });
+
+        text_location.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
+                    search_location.performClick();
+                }
+                return false;
+            }
+        });
+
+        add_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(MapActivity.this, MainActivity.class);
+                intent1.putExtra("location", location);
+                startActivity(intent1);
                 MapActivity.this.finish();
             }
         });
+
+        mapFragment.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        LatLng hanoi = new LatLng(21.027763, 105.834160);
-        mMap.addMarker(new MarkerOptions()
-                .position(hanoi)
-                .title("Mark in Hanoi"));
-        txtPosition.setText("Tọa độ (Lat: " + 21.027763 + "  " + "Lng: " + 105.834160 + ") Ha Noi");
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(hanoi));
+        if (location == null || location.equals("")) {
+            LatLng hanoi = new LatLng(21.027763, 105.834160); // 14.0583° N, 108.2772° E
+            mMap.addMarker(new MarkerOptions().position(hanoi).title("Ha Noi"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(hanoi));
+        } else {
+            List<Address> addresses = null;
+
+            if (location != null && !location.equals("")) {
+                Geocoder geocoder = new Geocoder(MapActivity.this);
+
+                try {
+                    addresses = geocoder.getFromLocationName(location, 3);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                if (addresses != null && addresses.size() != 0) {
+                    Address address = addresses.get(0);
+                    location = address.getAddressLine(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.clear();
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
+                } else {
+                    Toast.makeText(MapActivity.this, "Can not find this location! Check your internet or your Location!", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
 
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
                 MarkerOptions markerOptions = new MarkerOptions();
                 markerOptions.position(latLng);
-                markerOptions.title("Unknown location");
-                txtPosition.setText("Tọa độ (Lat: " + String.format("%.6g%n", latLng.latitude) + "  " + "Lng: " + String.format("%.6g%n", latLng.longitude) + ") Unknown");
+                markerOptions.title("Unknown");
                 mMap.clear();
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13));
                 mMap.addMarker(markerOptions);
             }
         });

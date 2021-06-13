@@ -28,6 +28,7 @@ public class SQLiteFoodHelper extends SQLiteOpenHelper {
     public void onCreate(@NotNull SQLiteDatabase db) {
         String sql = "create table food(" +
                 "id integer primary key autoincrement," +
+                "category int," +
                 "name text," +
                 "price double," +
                 "restaurant text," +
@@ -39,6 +40,7 @@ public class SQLiteFoodHelper extends SQLiteOpenHelper {
 
     public long addFood(Food o) {
         ContentValues c = new ContentValues();
+        c.put("category", o.getCategory());
         c.put("name", o.getName());
         c.put("price", o.getPrice());
         c.put("restaurant", o.getRestaurant());
@@ -56,12 +58,13 @@ public class SQLiteFoodHelper extends SQLiteOpenHelper {
                 null, null, null);
         while ((rs != null) && rs.moveToNext()) {
             int id = rs.getInt(0);
-            String name = rs.getString(1);
-            double price = rs.getDouble(2);
-            String restaurant = rs.getString(3);
-            int rating = rs.getInt(4);
-            int orders = rs.getInt(5);
-            list.add(new Food(id, name, price, restaurant, rating, orders));
+            int category = rs.getInt(1);
+            String name = rs.getString(2);
+            double price = rs.getDouble(3);
+            String restaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            list.add(new Food(id, category, name, price, restaurant, rating, orders));
         }
         return list;
     }
@@ -73,31 +76,93 @@ public class SQLiteFoodHelper extends SQLiteOpenHelper {
         Cursor rs = st.query("food", null, whereClause,
                 whereArgs, null, null, null);
         if (rs.moveToNext()) {
-            String name = rs.getString(1);
-            double price = rs.getDouble(2);
-            String restaurant = rs.getString(3);
-            int rating = rs.getInt(4);
-            int orders = rs.getInt(5);
-            Food o = new Food(id, name, price, restaurant, rating, orders);
+            int category = rs.getInt(1);
+            String name = rs.getString(2);
+            double price = rs.getDouble(3);
+            String restaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            Food o = new Food(id, category, name, price, restaurant, rating, orders);
             return o;
         }
         return null;
     }
 
-    public List<Food> getFoodsByName(String name) {
-        String whereClause = "name like ?";
-        String[] whereArgs = {"%" + name + "%"};
+    public List<Food> getFoodsByNameAndCategory(int category, String name) {
+        String whereClause = "category like ? and name like ?";
+        String[] whereArgs = {"%" + category + "%", "%" + name + "%"};
         SQLiteDatabase st = getReadableDatabase();
         Cursor rs = st.query("food", null, whereClause, whereArgs, null, null, null);
         List<Food> foods = new ArrayList<>();
         while (rs.moveToNext()) {
             int id = rs.getInt(0);
-            String oname = rs.getString(1);
-            double price = rs.getDouble(2);
-            String restaurant = rs.getString(3);
-            int rating = rs.getInt(4);
-            int orders = rs.getInt(5);
-            Food o = new Food(id, oname, price, restaurant, rating, orders);
+            int ocategory = rs.getInt(1);
+            String oname = rs.getString(2);
+            double price = rs.getDouble(3);
+            String restaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            Food o = new Food(id, ocategory, oname, price, restaurant, rating, orders);
+            foods.add(o);
+        }
+        return foods;
+    }
+
+    public List<Food> getFoodsByRestaurant(String restaurant) {
+        String whereClause = "restaurant like ?";
+        String[] whereArgs = {"%" + restaurant + "%"};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("food", null, whereClause, whereArgs, null, null, null);
+        List<Food> foods = new ArrayList<>();
+        while (rs.moveToNext()) {
+            int id = rs.getInt(0);
+            int category = rs.getInt(1);
+            String oname = rs.getString(2);
+            double price = rs.getDouble(3);
+            String orestaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            Food o = new Food(id, category, oname, price, orestaurant, rating, orders);
+            foods.add(o);
+        }
+        return foods;
+    }
+
+    public List<Food> getFoodsByRestaurantAndName(String name, String restaurant) {
+        String whereClause = "name like ? and restaurant like ?";
+        String[] whereArgs = {"%" + name + "%", "%" + restaurant + "%"};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("food", null, whereClause, whereArgs, null, null, null);
+        List<Food> foods = new ArrayList<>();
+        while (rs.moveToNext()) {
+            int id = rs.getInt(0);
+            int category = rs.getInt(1);
+            String oname = rs.getString(2);
+            double price = rs.getDouble(3);
+            String orestaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            Food o = new Food(id, category, oname, price, orestaurant, rating, orders);
+            foods.add(o);
+        }
+        return foods;
+    }
+
+    public List<Food> getFoodsByCategory(int category) {
+        String whereClause = "category like ?";
+        String[] whereArgs = {"%" + category + "%"};
+        SQLiteDatabase st = getReadableDatabase();
+        Cursor rs = st.query("food", null, whereClause, whereArgs, null, null, null);
+        List<Food> foods = new ArrayList<>();
+        while (rs.moveToNext()) {
+            int id = rs.getInt(0);
+            int ocategory = rs.getInt(1);
+            String oname = rs.getString(2);
+            double price = rs.getDouble(3);
+            String restaurant = rs.getString(4);
+            int rating = rs.getInt(5);
+            int orders = rs.getInt(6);
+            Food o = new Food(id, ocategory, oname, price, restaurant, rating, orders);
             foods.add(o);
         }
         return foods;
